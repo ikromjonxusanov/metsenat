@@ -12,7 +12,7 @@ class Donate(TimeStampedModel):
     class Status(models.IntegerChoices):
         New = (0, "Yangi")
         InModeration = (1, "Moderatsiyada")
-        Confirmed = (2, "Tasdiqlangan")
+        Confirmed = (2, "Tasdiqlangxan")
         Canceled = (3, "Bekor qilingan")
 
     fio = models.CharField(max_length=128)
@@ -20,7 +20,16 @@ class Donate(TimeStampedModel):
     organization = models.CharField(max_length=60, null=True)
     user_type = models.PositiveSmallIntegerField(choices=UserType.choices)
     status = models.PositiveSmallIntegerField(choices=Status.choices)
-    amount = models.PositiveBigIntegerField()
+    donate_amount = models.PositiveBigIntegerField()
+    spent_amount = models.PositiveBigIntegerField(default=0)
 
     def __str__(self):
         return self.fio
+
+    @property
+    def amount(self):
+        return self.donate_amount - self.spent_amount
+
+    @property
+    def is_spend(self):
+        return True if self.amount else False
