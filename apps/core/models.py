@@ -1,5 +1,7 @@
 from django.db import models
 
+from apps.core.validotors import PhoneValidator
+
 
 class TimeStampedModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -7,3 +9,21 @@ class TimeStampedModel(models.Model):
 
     class Meta:
         abstract = True
+
+
+class Person(TimeStampedModel):
+    fio = models.CharField(max_length=128)
+    phone_number = models.CharField(max_length=9, validators=[PhoneValidator])
+
+    def __str__(self):
+        return self.fio
+
+    class Meta:
+        abstract = True
+
+
+class OTM(TimeStampedModel):
+    name = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.name

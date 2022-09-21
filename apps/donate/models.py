@@ -1,10 +1,10 @@
 from django.db import models
 
-from apps.core.models import TimeStampedModel
-from apps.donate.validotors import PhoneValidator
+from apps.core.models import TimeStampedModel, Person
+from apps.student.models import Student
 
 
-class Donate(TimeStampedModel):
+class Donate(Person):
     class UserType(models.IntegerChoices):
         Y = (0, "Yuridik shaxs")
         J = (1, "Jismoniy shaxs")
@@ -15,16 +15,11 @@ class Donate(TimeStampedModel):
         Confirmed = (2, "Tasdiqlangxan")
         Canceled = (3, "Bekor qilingan")
 
-    fio = models.CharField(max_length=128)
-    phone_number = models.CharField(max_length=9, validators=[PhoneValidator])
     organization = models.CharField(max_length=60, null=True)
     user_type = models.PositiveSmallIntegerField(choices=UserType.choices)
     status = models.PositiveSmallIntegerField(choices=Status.choices)
     donate_amount = models.PositiveBigIntegerField()
     spent_amount = models.PositiveBigIntegerField(default=0)
-
-    def __str__(self):
-        return self.fio
 
     @property
     def amount(self):
@@ -33,3 +28,10 @@ class Donate(TimeStampedModel):
     @property
     def is_spend(self):
         return True if self.amount else False
+
+
+class DonatesForStudent(TimeStampedModel):
+    donater = models.ForeignKey(Donate, on_delete=models.RESTRICT, related_name='donater')
+    student = models.ForeignKey(Student, on_delete=models.RESTRICT, related_name='donater_for_student')
+
+    amount = models.PositiveBigIntegerField()

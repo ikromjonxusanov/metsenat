@@ -12,8 +12,6 @@ env = environ.Env(
 
 environ.Env.read_env()
 
-sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
-
 SECRET_KEY = env('SECRET_KEY')
 
 DEBUG = env('DEBUG')
