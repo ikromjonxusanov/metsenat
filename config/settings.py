@@ -21,7 +21,9 @@ DEBUG = env('DEBUG')
 ALLOWED_HOSTS = env('ALLOWED_HOSTS', cast=list)
 
 PROJECT_APPS = [
-    'apps.account'
+    'apps.account',
+    'apps.core',
+    'apps.donate'
 ]
 
 THIRD_PARTY_APPS = [
