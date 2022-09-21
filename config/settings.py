@@ -21,11 +21,13 @@ ALLOWED_HOSTS = env('ALLOWED_HOSTS', cast=list)
 PROJECT_APPS = [
     'apps.account',
     'apps.core',
-    'apps.donate'
+    'apps.donate',
+    'apps.student'
 ]
 
 THIRD_PARTY_APPS = [
-    'rest_framework'
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 INSTALLED_APPS = [
