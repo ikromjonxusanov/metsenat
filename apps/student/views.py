@@ -1,3 +1,11 @@
-from django.shortcuts import render
+from rest_framework import generics, permissions
 
-# Create your views here.
+from apps.student.serializers import AdminStudentAddSerializer
+
+
+class AdminStudentAddView(generics.CreateAPIView):
+    """Admin talabani qo'shish qismi"""
+    permission_classes = [permissions.IsAdminUser]
+    serializer_class = AdminStudentAddSerializer
+
+
