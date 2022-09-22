@@ -17,6 +17,7 @@ class AdminDonateListView(generics.ListAPIView):
 
 class AdminDonateRetrieveView(generics.RetrieveAPIView):
     """Admin homiyni ko'rish qismi"""
+    permission_classes = [permissions.IsAdminUser]
     serializer_class = AdminDonateRetrieveSerializer
     queryset = Donate.objects.all()
 
