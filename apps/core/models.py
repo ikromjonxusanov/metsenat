@@ -1,6 +1,8 @@
 from django.db import models
 
-from apps.core.validotors import PhoneValidator
+from django.core.validators import MinValueValidator
+
+from apps.core.validators import PhoneValidator
 
 
 class TimeStampedModel(models.Model):
@@ -13,7 +15,7 @@ class TimeStampedModel(models.Model):
 
 class Person(TimeStampedModel):
     fio = models.CharField(max_length=128)
-    phone_number = models.CharField(max_length=9, validators=[PhoneValidator])
+    phone_number = models.CharField(max_length=9, validators=[PhoneValidator()])
 
     def __str__(self):
         return self.fio
