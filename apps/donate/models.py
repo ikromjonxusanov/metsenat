@@ -17,7 +17,7 @@ class Donate(Person):
 
     organization = models.CharField(max_length=60, null=True)
     user_type = models.PositiveSmallIntegerField(choices=UserType.choices)
-    status = models.PositiveSmallIntegerField(choices=Status.choices)
+    status = models.PositiveSmallIntegerField(choices=Status.choices, default=Status.New)
     donate_amount = models.PositiveBigIntegerField()
     spent_amount = models.PositiveBigIntegerField(default=0)
 
