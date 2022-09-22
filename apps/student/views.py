@@ -1,6 +1,9 @@
 from rest_framework import generics, permissions
+from django.db.models import Prefetch
 
-from apps.student.serializers import AdminStudentAddSerializer
+from apps.core.models import OTM
+from apps.student.models import Student
+from apps.student.serializers import AdminStudentAddSerializer, AdminStudentListSerializer
 
 
 class AdminStudentAddView(generics.CreateAPIView):
@@ -9,3 +12,12 @@ class AdminStudentAddView(generics.CreateAPIView):
     serializer_class = AdminStudentAddSerializer
 
 
+class AdminStudentListView(generics.ListAPIView):
+    """Admin talabalar ro'yxatini ko'rish qismi"""
+    permission_classes = [permissions.IsAdminUser]
+    serializer_class = AdminStudentListSerializer
+
+    def get_queryset(self):
+        return Student.objects.prefetch_related(
+            Prefetch('otm', queryset=OTM.objects.only('name'))
+        )
