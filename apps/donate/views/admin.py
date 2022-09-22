@@ -1,4 +1,5 @@
 from rest_framework import generics, permissions
+from rest_framework.filters import SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 
 from apps.donate.filters import AdminDonateFilter
@@ -12,8 +13,9 @@ class AdminDonateListView(generics.ListAPIView):
     permission_classes = [permissions.IsAdminUser]
     serializer_class = AdminDonateListSerializer
     queryset = Donate.objects.all()
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [DjangoFilterBackend, SearchFilter]
     filterset_class = AdminDonateFilter
+    search_fields = ['fio']
 
 
 class AdminDonateRetrieveView(generics.RetrieveAPIView):
