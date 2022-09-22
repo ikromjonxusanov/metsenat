@@ -7,5 +7,6 @@ urlpatterns = [
         path('auth/', include('apps.account.urls')),
         path('', include('apps.donate.urls')),
         path('', include('apps.student.urls')),
+        path('', include('apps.core.urls')),
     ]))
 ]
