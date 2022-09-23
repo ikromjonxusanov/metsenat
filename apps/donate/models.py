@@ -26,3 +26,6 @@ class DonatesForStudent(TimeStampedModel):
     student = models.ForeignKey(Student, on_delete=models.RESTRICT, related_name='donater_for_student')
 
     amount = models.PositiveBigIntegerField()
+
+    class Meta:
+        unique_together = ['donater', 'student']

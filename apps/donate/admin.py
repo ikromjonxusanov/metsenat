@@ -11,7 +11,7 @@ class DonateAdmin(admin.ModelAdmin):
 
 @admin.register(DonatesForStudent)
 class DonatesForStudentAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['id', 'donater', 'student', 'amount']
 
 
 @admin.register(Student)

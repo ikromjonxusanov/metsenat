@@ -11,6 +11,12 @@ class AdminStudentAddSerializer(serializers.ModelSerializer):
         fields = ['fio', 'phone_number', 'degree_type', 'otm', 'contract_amount']
 
 
+class AdminStudentEditSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+        fields = ['fio', 'phone_number', 'otm', 'contract_amount']
+
+
 class AdminStudentListSerializer(serializers.ModelSerializer):
     otm = serializers.CharField(source='otm.name', read_only=True)
     degree_type = serializers.CharField(source='get_degree_type_display')
