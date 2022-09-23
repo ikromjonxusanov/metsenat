@@ -15,19 +15,10 @@ class Donate(Person):
         Confirmed = (2, "Tasdiqlangxan")
         Canceled = (3, "Bekor qilingan")
 
-    organization = models.CharField(max_length=60, null=True)
+    organization = models.CharField(max_length=60, null=True, blank=True)
     user_type = models.PositiveSmallIntegerField(choices=UserType.choices)
     status = models.PositiveSmallIntegerField(choices=Status.choices, default=Status.New)
     donate_amount = models.PositiveBigIntegerField()
-    spent_amount = models.PositiveBigIntegerField(default=0)
-
-    @property
-    def amount(self):
-        return self.donate_amount - self.spent_amount
-
-    @property
-    def is_spend(self):
-        return True if self.amount else False
 
 
 class DonatesForStudent(TimeStampedModel):

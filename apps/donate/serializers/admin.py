@@ -1,13 +1,14 @@
 from rest_framework import serializers
 
+from apps.core.helpers import parse_phone_number
 from apps.core.validators import PhoneValidator
-from apps.donate.helpers import parse_phone_number
-from apps.donate.models import Donate
+from apps.donate.models import Donate, DonatesForStudent
 
 
 class AdminDonateListSerializer(serializers.ModelSerializer):
     status = serializers.CharField(source='get_status_display')
     phone_number = serializers.SerializerMethodField()
+    spent_amount = serializers.IntegerField(read_only=True)
 
     @staticmethod
     def get_phone_number(obj):
@@ -48,3 +49,11 @@ class AdminDonateEditSerializer(serializers.ModelSerializer):
                                 "qilyapsiz iltimos Tashkilot nomini kiriting"
             })
         return attrs
+
+
+class StudentDonaterListSerializer(serializers.ModelSerializer):
+    donater = serializers.CharField(source='donater.fio', read_only=True)
+
+    class Meta:
+        model = DonatesForStudent
+        fields = ['id', 'donater', 'amount']
