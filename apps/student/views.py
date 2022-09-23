@@ -42,7 +42,7 @@ class AdminStudentListView(generics.ListAPIView):
 
 class AdminStudentRetrieveView(generics.RetrieveAPIView):
     """Admin talaba haqida to'liq ma'lumot olish qismi"""
-    permission_classes = [permissions.IsAdminUser]
+    # permission_classes = [permissions.IsAdminUser]
     serializer_class = AdminStudentRetrieveSerializer
 
     def get_queryset(self):

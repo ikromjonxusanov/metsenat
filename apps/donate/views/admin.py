@@ -1,6 +1,5 @@
 from django.db.models import Sum, Prefetch
 from django.db.models.functions import Coalesce
-
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, permissions
 from rest_framework.filters import SearchFilter
@@ -8,7 +7,7 @@ from rest_framework.filters import SearchFilter
 from apps.donate.filters import AdminDonateFilter
 from apps.donate.models import Donate, DonatesForStudent
 from apps.donate.serializers.admin import AdminDonateListSerializer, AdminDonateRetrieveSerializer, \
-    AdminDonateEditSerializer
+    AdminDonateEditSerializer, AdminDonateForStudentAddSerializer, AdminDonateForStudentEditSerializer
 
 
 class AdminDonateListView(generics.ListAPIView):
@@ -39,3 +38,22 @@ class AdminDonateEditView(generics.UpdateAPIView):
     permission_classes = [permissions.IsAdminUser]
     serializer_class = AdminDonateEditSerializer
     queryset = Donate.objects.all()
+
+
+class AdminDonateForStudentAddView(generics.CreateAPIView):
+    """Admin talabaga homiy qo'shish qismi"""
+    permission_classes = [permissions.IsAdminUser]
+    serializer_class = AdminDonateForStudentAddSerializer
+
+
+class AdminDonateForStudentEditView(generics.UpdateAPIView):
+    """Admin talabaga homiy tahrirlash qismi"""
+    permission_classes = [permissions.IsAdminUser]
+    serializer_class = AdminDonateForStudentEditSerializer
+    queryset = DonatesForStudent.objects.all()
+
+
+class AdminDonateForStudentDeleteView(generics.DestroyAPIView):
+    """Admin talabaga homiy tahrirlash qismi"""
+    permission_classes = [permissions.IsAdminUser]
+    queryset = DonatesForStudent.objects.all()
