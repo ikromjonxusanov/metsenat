@@ -8,13 +8,20 @@ from apps.donate.models import DonatesForStudent, Donate
 from apps.student.filters import AdminStudentFilter
 from apps.student.models import Student
 from apps.student.serializers import AdminStudentAddSerializer, AdminStudentListSerializer, \
-    AdminStudentRetrieveSerializer
+    AdminStudentRetrieveSerializer, AdminStudentEditSerializer
 
 
 class AdminStudentAddView(generics.CreateAPIView):
     """Admin talabani qo'shish qismi"""
     permission_classes = [permissions.IsAdminUser]
     serializer_class = AdminStudentAddSerializer
+
+
+class AdminStudentEditView(generics.UpdateAPIView):
+    """Admin talabani qo'shish qismi"""
+    permission_classes = [permissions.IsAdminUser]
+    serializer_class = AdminStudentEditSerializer
+    queryset = Student.objects.all()
 
 
 class AdminStudentListView(generics.ListAPIView):
@@ -35,7 +42,7 @@ class AdminStudentListView(generics.ListAPIView):
 
 class AdminStudentRetrieveView(generics.RetrieveAPIView):
     """Admin talaba haqida to'liq ma'lumot olish qismi"""
-    # permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAdminUser]
     serializer_class = AdminStudentRetrieveSerializer
 
     def get_queryset(self):
