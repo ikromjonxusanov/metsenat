@@ -8,6 +8,7 @@ from apps.donate.models import Donate
 class AdminDonateListSerializer(serializers.ModelSerializer):
     status = serializers.CharField(source='get_status_display')
     phone_number = serializers.SerializerMethodField()
+    spent_amount = serializers.IntegerField(read_only=True)
 
     @staticmethod
     def get_phone_number(obj):
