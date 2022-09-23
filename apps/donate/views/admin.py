@@ -13,7 +13,7 @@ from apps.donate.serializers.admin import AdminDonateListSerializer, AdminDonate
 
 class AdminDonateListView(generics.ListAPIView):
     """Admin homiylar ro'xatini ko'rish qismi"""
-    # permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAdminUser]
     serializer_class = AdminDonateListSerializer
     filter_backends = [DjangoFilterBackend, SearchFilter]
     filterset_class = AdminDonateFilter
