@@ -22,7 +22,8 @@ PROJECT_APPS = [
     'apps.account',
     'apps.core',
     'apps.donate',
-    'apps.student'
+    'apps.student',
+    'apps.statistic'
 ]
 
 THIRD_PARTY_APPS = [

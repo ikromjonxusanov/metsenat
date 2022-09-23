@@ -8,5 +8,6 @@ urlpatterns = [
         path('', include('apps.donate.urls')),
         path('', include('apps.student.urls')),
         path('', include('apps.core.urls')),
+        path('', include('apps.statistic.urls')),
     ]))
 ]
