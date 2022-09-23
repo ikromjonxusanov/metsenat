@@ -16,4 +16,4 @@ class DonatesForStudentAdmin(admin.ModelAdmin):
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ['id', 'fio', 'phone_number']
+    list_display = ['id', 'fio', 'phone_number', 'contract_amount']
